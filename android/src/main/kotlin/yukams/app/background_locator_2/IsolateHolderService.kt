@@ -108,6 +108,9 @@ class IsolateHolderService : MethodChannel.MethodCallHandler, LocationUpdateList
                 Keys.CHANNEL_ID, notificationChannelName,
                 NotificationManager.IMPORTANCE_LOW
             )
+            .apply{
+                setShowBadge(false)
+            }
 
             (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)
                 .createNotificationChannel(channel)
@@ -134,6 +137,7 @@ class IsolateHolderService : MethodChannel.MethodCallHandler, LocationUpdateList
             .setContentIntent(pendingIntent)
             .setOnlyAlertOnce(true) // so when data is updated don't make sound and alert in android 8.0+
             .setOngoing(true)
+            .setBadgeIconType(NotificationCompat.BADGE_ICON_NONE)
             .build()
     }
 
